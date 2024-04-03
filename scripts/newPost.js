@@ -7,14 +7,17 @@ async function addPost(post) {
      * 3. Save the list posts back to local storage
      */
 
-    // Your code here
+    try {
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+        posts.unshift(post); // Corrected line
+        localStorage.setItem('posts', JSON.stringify(posts));
+        
+        // Trigger event to update the displayed posts
+        const select = document.querySelector('select');
+        const event = new Event('change');
+        select.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error adding post:', error);
+    }
 }
-
-
-document.querySelector('#new-post').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const title = e.target.title.value;
-    const body = e.target.body.value;
-    addPost({title, body});
-    e.target.reset();
-});

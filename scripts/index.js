@@ -73,7 +73,6 @@ window.addEventListener('storage', () => {
   select.dispatchEvent(event);
 });
 
-
 /** COMPLETE THIS PART */
 
 async function getUsers() {
@@ -85,6 +84,20 @@ async function getUsers() {
    */
 
   // Your code here
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch users');
+    }
+
+    const users = await response.json();
+    populateSelectionOptions(users);
+    
+  } 
+  catch (error) {
+    console.error(error);
+  }
 
 }
 
@@ -95,7 +108,22 @@ async function getPosts(user) {
  */
 
 // Your code here
-} 
+try {
+  const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`);
+
+if (!response.ok) { /* i forgot the ! here and spent like an hour trying to figure out why i couldnt get a response to work properly :(*/ 
+throw new Error('Failed to fetch posts');
+
+} else {
+const posts = await response.json();
+displayPosts(posts, user.name);
+  
+} } catch (error) {
+  console.error(error);
+}
+}
+
+
 
 getUsers();
 
