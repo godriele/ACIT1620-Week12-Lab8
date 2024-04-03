@@ -20,7 +20,8 @@ async function addPost(post) {
         // Your code here
     }
     
-    document.querySelector('#new-post').addEventListener('submit', (e) => {
+    
+    w-post').addEventListener('submit', (e) => {
         e.preventDefault();
         const title = e.target.title.value;
         const body = e.target.body.value;
@@ -28,5 +29,3 @@ async function addPost(post) {
         e.target.reset();
     });
 
-
-    
